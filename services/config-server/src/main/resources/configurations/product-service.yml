@@ -1,5 +1,5 @@
 datasource:
-  url: jdbc:postresql://localhost:5432/product
+  url: jdbc:postgresql://localhost:5432/product
   username: ags
   password: ags
   driver-class-name: org.postgresql.Driver
@@ -7,7 +7,7 @@ jpa:
   hibernate:
     ddl-auto: validate
   database: postgresql
-  database-platform: org.hibernate.dialect.PostreSQLDialect
+  database-platform: org.hibernate.dialect.PostgreSQLDialect
 flyway:
   baseline-on-migrate: true
   enabled: true
