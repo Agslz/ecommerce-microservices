@@ -1,4 +1,4 @@
-package com.ags.ecommerce.config;
+package com.ags.ecommerce.configuration;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
