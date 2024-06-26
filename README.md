@@ -49,4 +49,11 @@ El sistema está compuesto por varios microservicios, cada uno responsable de un
 
 ## Imágenes
 
+## Diagrama sobre microservicios y tecnoologias utilizadas
+
 ![Untitled](https://github.com/Agslz/ecommerce-microservices/assets/83142033/f6c1b2c5-a191-4aa6-ae67-9459b8791c9b)
+
+## Ejemplo del correo que recibe el cliente a la hora de la compra
+
+![Untitled](https://github.com/Agslz/ecommerce-microservices/assets/83142033/64d11865-681f-4b56-8080-ec0f4ef1b58e)
+
