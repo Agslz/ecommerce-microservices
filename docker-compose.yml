@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   postgresql:
     container_name: ms_pg_sql
@@ -18,8 +20,8 @@ services:
     container_name: ms_pgadmin
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
       - pgadmin:/var/lib/pgadmin
@@ -35,7 +37,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongo:/data
+      - mongo:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: ags
       MONGO_INITDB_ROOT_PASSWORD: ags
@@ -65,7 +67,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - "22181:2181"
+      - "2181:2181"
     networks:
       - microservices-net
 
@@ -74,6 +76,7 @@ services:
     container_name: ms_kafka
     ports:
       - "9092:9092"
+      - "9093:9093"
     depends_on:
       - zookeeper
     environment:
@@ -82,12 +85,13 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://ms_kafka:9092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:9093
     networks:
       - microservices-net
 
   mail-dev:
-    container_name: ms-mail-dev
+    container_name: ms_mail_dev
     image: maildev/maildev
     ports:
       - "1080:1080"
